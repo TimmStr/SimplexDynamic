@@ -25,13 +25,13 @@ class Greeting:
             for struc in range(0, self.structureVariables):
                 pass
                 #### später Auskommentieren weg machen
-                # x = float(input(('Type the '+str(struc+1)+'. strucure variable of the '+str(equa+1))+'. equation: '))
+                # x = float(input(('Insert the '+str(struc+1)+'. strucure variable of the '+str(equa+1))+'. equation: '))
                 # self.arrays[equa][struc]=x
                 # print(self.arrays)
             self.arrays[equa][counter] = 1
             counter = counter + 1
             ### später Auskommentieren weg machen
-            # x = float(input(('Type the b variable for the ' + str(equa + 1)) + '. equation: '))
+            # x = float(input(('Insert the b variable for the ' + str(equa + 1)) + '. equation: '))
             # self.arrays[equa][self.structureVariables+self.equations]=x
             # print(self.arrays)
         # ab hier später löschen
@@ -48,7 +48,7 @@ class Greeting:
     def add_target_function(self):
         for struc in range(0, self.structureVariables):
             # später auskommentieren
-            # x = float(input(('Type the ' + str(struc + 1) + '. structure variable of the target equation: ')))
+            # x = float(input(('Insert the ' + str(struc + 1) + '. structure variable of the target equation: ')))
             pass
             # self.arrays[self.equations][struc]=x
 
@@ -72,7 +72,7 @@ class Greeting:
         if min < 0:
             self.calc_pivot_element(column_index)
         else:
-            print('Optimale Lösung gefunden')
+            print('Found perfect solution')
             self.show_graphics()
 
     def calc_pivot_element(self, column_index):
@@ -94,7 +94,6 @@ class Greeting:
             self.arrays[row_index][i] = self.arrays[row_index][i] / divide_by
 
         self.arrays[1][3] = self.arrays[1][3] / 10
-        # np.set_printoptions(precision=3)
         print(self.arrays)
         print()
         self.base_change(row_index, column_index)
