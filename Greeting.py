@@ -25,7 +25,7 @@ class Greeting:
             for struc in range(0, self.structureVariables):
                 pass
                 #### später Auskommentieren weg machen
-                # x = float(input(('Insert the '+str(struc+1)+'. strucure variable of the '+str(equa+1))+'. equation: '))
+                # x = float(input(('Insert the '+str(struc+1)+'. structure variable of the '+str(equa+1))+'. equation: '))
                 # self.arrays[equa][struc]=x
                 # print(self.arrays)
             self.arrays[equa][counter] = 1
