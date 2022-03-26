@@ -4,10 +4,8 @@ from matplotlib import pyplot as plt
 
 class Greeting:
     def __init__(self):
-        # self.structureVariables = int(input('How many structure variables:'))
-        self.structureVariables = 2  #### später löschen
-        # self.equations = int(input('How many equations:'))
-        self.equations = 3  ##### später löschen
+        self.structureVariables = int(input('How many structure variables:'))
+        self.equations = int(input('How many equations:'))
         self.targetFunction = 0
         self.arrays = 0
         self.solutions = []
@@ -19,74 +17,65 @@ class Greeting:
         self.fill_array()
 
     def fill_array(self):
-        # fill structure-,slack variables and b variables
-        counter = self.structureVariables
+        #fill structure-,slack variables and b variables
+        counter=self.structureVariables
         for equa in range(0, self.equations):
             for struc in range(0, self.structureVariables):
-                pass
-                #### später Auskommentieren weg machen
-                # x = float(input(('Type the '+str(struc+1)+'. strucure variable of the '+str(equa+1))+'. equation: '))
-                # self.arrays[equa][struc]=x
-                # print(self.arrays)
-            self.arrays[equa][counter] = 1
+                x = float(input(('Insert the '+str(struc+1)+'. strucure variable of the '+str(equa+1))+'. equation: '))
+                self.arrays[equa][struc]=x
+                print(self.arrays)
+            self.arrays[equa][counter]=1
             counter = counter + 1
-            ### später Auskommentieren weg machen
-            # x = float(input(('Type the b variable for the ' + str(equa + 1)) + '. equation: '))
-            # self.arrays[equa][self.structureVariables+self.equations]=x
-            # print(self.arrays)
-        # ab hier später löschen
-        self.arrays = np.array([[40., 24, 1, 0, 0, 480],
-                                [24, 48, 0, 1, 0, 480],
-                                [0, 60, 0, 0, 1, 480],
-                                [10, 40, 0, 0, 0, 0]], dtype=float)
-        np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
-        # bis hier hin
-        print(self.arrays)
 
+            x = float(input(('Insert the b variable for the ' + str(equa + 1)) + '. equation: '))
+            self.arrays[equa][self.structureVariables+self.equations]=x
+            print(self.arrays)
+
+        print(self.arrays)
+        np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
         self.add_target_function()
 
     def add_target_function(self):
-        for struc in range(0, self.structureVariables):
-            # später auskommentieren
-            # x = float(input(('Type the ' + str(struc + 1) + '. structure variable of the target equation: ')))
-            pass
-            # self.arrays[self.equations][struc]=x
+        for struc in range(0,self.structureVariables):
+
+            x = float(input(('Insert the ' + str(struc + 1) + '. structure variable of the target equation: ')))
+            self.arrays[self.equations][struc]=x
 
         x = int(input(('If you want to maximize, type 1: ')))
         if (x == 1):
-            for i in range(0, self.structureVariables):
-                self.arrays[self.equations][i] = self.arrays[self.equations][i] * -1
+            for i in range(0,self.structureVariables):
+                self.arrays[self.equations][i]=self.arrays[self.equations][i]*-1
         print(self.arrays)
         print()
         self.calc_pivot_column()
 
     def calc_pivot_column(self):
-        min = self.arrays[self.equations][0]
-        column_index = 0
-        for i in range(1, self.structureVariables + self.equations + 1):
-            if self.arrays[self.equations][i] < min:
-                min = self.arrays[self.equations][i]
-                column_index = i
-        # print('Min= '+str(min))
-        # print('Index= '+str(column_index))
-        if min < 0:
+        min=self.arrays[self.equations][0]
+        column_index=0
+        for i in range(1, self.structureVariables+self.equations+1):
+            if self.arrays[self.equations][i]<min:
+                min=self.arrays[self.equations][i]
+                column_index=i
+        #print('Min= '+str(min))
+        #print('Index= '+str(column_index))
+        if min<0:
             self.calc_pivot_element(column_index)
         else:
-            print('Optimale Lösung gefunden')
+            print('Found perfect solution')
             self.show_graphics()
 
     def calc_pivot_element(self, column_index):
-        row_index = 0
-        pivot = self.arrays[0][self.structureVariables + self.equations] / self.arrays[0][column_index]
-        for i in range(1, self.equations):
-            if (self.arrays[i][column_index] > 0 and
-                    self.arrays[i][self.structureVariables + self.equations] / self.arrays[i][column_index] < pivot):
-                pivot = self.arrays[i][self.structureVariables + self.equations] / self.arrays[i][column_index]
-                row_index = i
+        row_index=0
+        pivot=self.arrays[0][self.structureVariables+self.equations]/self.arrays[0][column_index]
+        for i in range(1,self.equations):
+            if(self.arrays[i][column_index]>0 and
+                    self.arrays[i][self.structureVariables+self.equations]/self.arrays[i][column_index]<pivot):
+                pivot=self.arrays[i][self.structureVariables+self.equations]/self.arrays[i][column_index]
+                row_index=i
         print(self.arrays[row_index][column_index])
         print()
-        self.divide_row_by_pivot(row_index, column_index)
-        # print(pivot)
+        self.divide_row_by_pivot(row_index,column_index)
+        #print(pivot)
 
     def divide_row_by_pivot(self, row_index, column_index):
         divide_by = self.arrays[row_index][column_index]
@@ -119,7 +108,6 @@ class Greeting:
                 self.solutions.append(b)
             else:
                 self.solutions.append(0)
-
         self.calc_pivot_column()
 
     def show_graphics(self):
@@ -146,8 +134,8 @@ class Greeting:
                 fig = plt.figure()
                 ax = fig.add_subplot(projection='3d')
                 test = 0
-                written = False
                 for i in range(0, len(self.solutions)):
+                    written = False
                     if (test == 0):
                         x.append(self.solutions[i])
                         test = 1
@@ -160,11 +148,13 @@ class Greeting:
                         z.append(self.solutions[i])
                         test = 0
                         written = True
+                print(x)
+                print(y)
+                print(z)
                 ax.scatter(x, y, z)
-                plt.xlabel('1st structure variable')
-                plt.ylabel('2nd structure variable')
-                plt.zlabel('3rd structure variable')
+                ax.set_xlabel('1st structure variable')
+                ax.set_ylabel('2nd structure variable')
+                ax.set_zlabel('3rd structure variable')
         plt.show()
-
 
 g = Greeting()
