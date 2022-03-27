@@ -5,9 +5,12 @@ from matplotlib import pyplot as plt
 class Greeting:
     def __init__(self):
         # self.structureVariables = int(input('How many structure variables:'))
-        self.structureVariables = 2  #### später löschen
+        #self.structureVariables = 2  #### später löschen
         # self.equations = int(input('How many equations:'))
-        self.equations = 3  ##### später löschen
+        #self.equations = 3  ##### später löschen
+
+        self.structureVariables = 3  #### später löschen
+        self.equations = 2  ##### später löschen
         self.targetFunction = 0
         self.arrays = 0
         self.solutions = []
@@ -35,13 +38,20 @@ class Greeting:
             # self.arrays[equa][self.structureVariables+self.equations]=x
             # print(self.arrays)
         # ab hier später löschen
-        self.arrays = np.array([[40., 24, 1, 0, 0, 480],
-                                [24, 48, 0, 1, 0, 480],
-                                [0, 60, 0, 0, 1, 480],
-                                [10, 40, 0, 0, 0, 0]], dtype=float)
-        np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
+        # self.arrays = np.array([[40., 24, 1, 0, 0, 480],
+        #                         [24, 48, 0, 1, 0, 480],
+        #                         [0, 60, 0, 0, 1, 480],
+        #                         [10, 40, 0, 0, 0, 0]], dtype=float)
+        # np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
         # bis hier hin
+
+        # 3d Darstellung:
+
         print(self.arrays)
+        self.arrays = np.array([[1, 2, 7, 1, 0, 4],
+                                [1, 3, 1, 0, 1, 5],
+                                [1, 0, 3, 0, 0, 0]], dtype=float)
+        np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
 
         self.add_target_function()
 
@@ -145,8 +155,8 @@ class Greeting:
                 fig = plt.figure()
                 ax = fig.add_subplot(projection='3d')
                 test = 0
-                written = False
                 for i in range(0, len(self.solutions)):
+                    written = False
                     if (test == 0):
                         x.append(self.solutions[i])
                         test = 1
@@ -159,11 +169,15 @@ class Greeting:
                         z.append(self.solutions[i])
                         test = 0
                         written = True
+                print('1st structure variable'+str(x))
+                if(len(y)>=1):
+                    print('2nd structure variable'+str(y))
+                if(len(z)>=1):
+                    print('3rd structure variable'+str(z))
                 ax.scatter(x, y, z)
-                plt.xlabel('1st structure variable')
-                plt.ylabel('2nd structure variable')
-                plt.zlabel('3rd structure variable')
+                ax.set_xlabel('1st structure variable')
+                ax.set_ylabel('2nd structure variable')
+                ax.set_zlabel('3rd structure variable')
         plt.show()
-
 
 g = Greeting()
